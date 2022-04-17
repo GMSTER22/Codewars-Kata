@@ -25,8 +25,55 @@ let twentyFiveBill = 25;
 let fiftyBill = 50;
 let hundredBill = 100;
 
+// let log = function (element) {
+//     console.log(element);
+// }
+
 function tickets(peopleInLine){
-    // ...
+    let lastIndex = peopleInLine.length - 1;
+
+    for (let i = 0; i < (peopleInLine.length - 1); i++) {
+        //25 bill
+        
+        if (peopleInLine[i] === twentyFiveBill) {
+            cashRegister.push(peopleInLine[i]);
+            // console.log(peopleInLine.indexOf(peopleInLine[i], i), peopleInLine.indexOf(peopleInLine[lastIndex]));
+            if (peopleInLine.indexOf(peopleInLine[i], i) === peopleInLine.indexOf(peopleInLine[lastIndex])) {
+               console.log("YES");
+            } 
+        //50 dollar bill
+        } else if (peopleInLine[i] === fiftyBill) {
+            if ( cashRegister.indexOf(twentyFiveBill) === -1) {
+                if (peopleInLine.indexOf(peopleInLine[i], i) === lastIndex) {
+                    console.log("No. Vasya will not have enough money to give change to 50 dollars");
+                }
+            } else {             
+                cashRegister.push(peopleInLine[i]);
+                cashRegister.splice(cashRegister.indexOf(peopleInLine[i]), 1);
+                if (peopleInLine.indexOf(peopleInLine[i], i) === lastIndex) {
+                    console.log("YES", lastIndex);
+                }
+            }
+        //100 dollar bill
+        } else if (peopleInLine[i] === hundredBill) {
+            if ((cashRegister.indexOf(fiftyBill) !== -1) && (cashRegister.indexOf(twentyFiveBill) !== -1)) {
+                cashRegister.push(hundredBill);
+                cashRegister.splice(cashRegister.indexOf(fiftyBill), 1);
+                cashRegister.splice(cashRegister.indexOf(twentyFiveBill), 1);                
+                if (peopleInLine.indexOf(peopleInLine[i], i) === lastIndex) {
+                    console.log("YES");
+                }
+            } else {
+                console.log("NO. Vasya will not have the right bills to give 75 dollars of change (you can't make two bills of 25 from one of 50");
+            }
+        }
+    }
+    cashRegister = [];
+}
+
+
+
+ /*
     peopleInLine.forEach(amount => {
         //$25 bill case
         // ((peopleInLine.indexOf(amount) === (peopleInLine.length - 1)) ? ;
@@ -54,7 +101,4 @@ function tickets(peopleInLine){
             }
         }
     });
-    cashRegister = [];
-}
-
-
+    */
